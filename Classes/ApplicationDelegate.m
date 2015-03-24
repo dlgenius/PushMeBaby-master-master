@@ -76,8 +76,13 @@
 	
 	// Establish connection to server.
 	PeerSpec peer;
-	result = MakeServerConnection("gateway.sandbox.push.apple.com", 2195, &socket, &peer);// NSLog(@"MakeServerConnection(): %d", result);
-	
+    
+#warning 测试证书
+//    result = MakeServerConnection("gateway.sandbox.push.apple.com", 2195, &socket, &peer);// NSLog(@"MakeServerConnection(): %d", result);
+
+#warning 正式证书
+    result = MakeServerConnection("gateway.push.apple.com", 2195, &socket, &peer);// NSLog(@"MakeServerConnection(): %d", result);
+
 	// Create new SSL context.
 	result = SSLNewContext(false, &context);// NSLog(@"SSLNewContext(): %d", result);
 	
@@ -88,7 +93,10 @@
 	result = SSLSetConnection(context, socket);// NSLog(@"SSLSetConnection(): %d", result);
 	
 	// Set server domain name.
-	result = SSLSetPeerDomainName(context, "gateway.sandbox.push.apple.com", 30);// NSLog(@"SSLSetPeerDomainName(): %d", result);
+#warning 测试证书
+//    result = SSLSetPeerDomainName(context, "gateway.sandbox.push.apple.com", 30);// NSLog(@"SSLSetPeerDomainName(): %d", result);
+#warning 正式证书
+    result = SSLSetPeerDomainName(context, "gateway.push.apple.com", 22);
 	
 	// Open keychain.
 	result = SecKeychainCopyDefault(&keychain);// NSLog(@"SecKeychainOpen(): %d", result);
